@@ -9,8 +9,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path={process.env.NODE_ENV === 'production' ? '/vite-react-sample-test/' : '/'} element={<Home />} /> 
-        <Route path='week2' element={<Week2 />} />
+        <Route path="/" element={<Home />} /> 
+        <Route path="/week2" element={<Week2 />} />
       </Routes>
     </>
   )
