@@ -58,7 +58,7 @@ function Week2() {
   const [note, setNote] = useState('')
   const [order, setOrder] = useState([])
   return (
-    <>
+    <div className='rootContainer'>
      <div className='container'>
       <h2 className='text-6xl font-bold mb-5'>飲料點餐系統</h2>
       <div className='flex'>
@@ -67,7 +67,7 @@ function Week2() {
       </div>
       <Orders order={ order }/>
      </div>
-    </>
+    </div>
   )
 }
 
