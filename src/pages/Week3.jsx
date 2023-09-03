@@ -6,9 +6,9 @@ function Week3() {
   // 如果不在的話，跳轉至 /login
   
   return (
-    <div className='bg-[#FFD370]'>
-     <Outlet/>
-    </div>
+    <>
+      <Outlet/>
+    </>
   )
 }
 
