@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import {useForm} from 'react-hook-form';
+import { useNavigate } from "react-router-dom";
 function SignIn({setIsActive}) {
+  const navigate = useNavigate();
   const {
     register, 
     handleSubmit, 
@@ -10,7 +12,7 @@ function SignIn({setIsActive}) {
     }
   );
   const onSubmit = (data) => {
-    console.log(data)
+    navigate('/week3/todolist')
   }
   return (
    <>

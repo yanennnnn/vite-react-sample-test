@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Week2 from './pages/week2'
 import Week3 from './pages/week3'
 import Login from './pages/login'
+import Todolist from './pages/todolist'
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
         <Route path="/week2" element={<Week2 />} />
         <Route path="/week3" element={<Week3 />}>
           <Route path="login" element={<Login />} />
+          <Route path="todolist" element={<Todolist />} />
         </Route>
       </Routes>
     </>
