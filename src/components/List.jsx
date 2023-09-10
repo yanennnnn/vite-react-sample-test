@@ -74,7 +74,7 @@ function List({ todoList, getTodo }) {
         <div>
           {resultTodoList.map((item) => 
             <div key={item.id} className='flex items-center py-[4px] border-b border-solid border-neutral-200'>
-              <label className="check-box relative">
+              <label className="check-box relative cursor-pointer">
                 <input type="checkbox" id="checkbox" className='invisible' onChange={() => {
                   API.PATCH(`/todos/${item.id}/toggle`).then(()=> {
                     getTodo()
