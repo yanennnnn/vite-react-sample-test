@@ -2,12 +2,24 @@ import PropTypes from 'prop-types';
 import {useForm} from 'react-hook-form';
 import { useState } from 'react'
 import Swal from 'sweetalert2'
+import API from '@/utils/api'
 function SignUp({setIsActive}) {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
   const {
     register, 
     handleSubmit, 
     setError,
     resetField,
+    reset,
     formState: {errors}
   } = useForm({ 
       mode: 'onTouched'
@@ -18,11 +30,22 @@ function SignUp({setIsActive}) {
       setError("confirm", { type: "focus", message: '密碼比對錯誤' }, { shouldFocus: true })
       resetField("confirm", { keepError: true })
     } else {
-      Swal.fire({
-        title: 'Success!',
-        text: '登入成功',
-        icon: 'success',
-        confirmButtonText: '確認'
+      API.POST('/users/sign_up', {
+        email, 
+        nickname: name,
+        password
+      }).then(() => {
+        Toast.fire({
+          icon: 'success',
+          title: '註冊成功'
+        })
+        setIsActive('signIn')
+      }).catch((error)=> {
+        reset()
+        Toast.fire({
+          icon: 'error',
+          title: Array.isArray(error) ? error[0] : error
+        })
       })
     }
   }

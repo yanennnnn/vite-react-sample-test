@@ -1,7 +1,20 @@
 import PropTypes from 'prop-types';
 import {useForm} from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
+import API from '@/utils/api'
+import Swal from 'sweetalert2'
+import { setCookie } from "@/utils/cookie";
 function SignIn({setIsActive}) {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
   const navigate = useNavigate();
   const {
     register, 
@@ -12,7 +25,30 @@ function SignIn({setIsActive}) {
     }
   );
   const onSubmit = (data) => {
-    navigate('/week3/todolist')
+    API.POST('/users/sign_in', {
+     ...data
+    }).then((res) => {
+      Toast.fire({
+        icon: 'success',
+        title: 'HI~'
+      })
+      navigate('/week3/todolist')
+      setCookie({
+        name: 'token',
+        content: res.token,
+        expires: 1
+      })
+      setCookie({
+        name: 'user',
+        content: res.nickname,
+        expires: 1
+      })
+    }).catch((error)=> {
+      Toast.fire({
+        icon: 'error',
+        title: error
+      })
+    })
   }
   return (
    <>
